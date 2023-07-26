@@ -22,7 +22,7 @@ pipeline {
         
         stage('post build') {
             steps {
-                archiveArtifacts artifacts: '**/spring-petclinic-3.0.0-SNAPSHOT.jar',
+                archiveArtifacts artifacts: '**/*.jar',
                                  onlyIfSuccessful: true
                 junit testResults: '**/surefire-reports/TEST-*.xml'
             }
