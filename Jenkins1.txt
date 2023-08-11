@@ -20,11 +20,10 @@ pipeline {
             }
         }
         stage('sonar analysis') {
-             steps {
+              steps {
+                // performing sonarqube analysis with "withSonarQubeENV(<Name of Server configured in Jenkins>)"
                 withSonarQubeEnv('SONAR_CLOUD') {
-                    sh" ${SCANNER_HOME}}/bin/SONAR_CLOUD \
-                    -Dsonar.projectKey=springpetclinic20 \
-                    -Dsonar.sources=. "
+                    sh 'mvn clean package sonar:sonar -Dsonar.token=c427d03741d119659e1c718f6630402c9d661743 -Dsonar.projectkey=springpetclinic20'
                 }
             }
         }
