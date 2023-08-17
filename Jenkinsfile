@@ -20,10 +20,13 @@ pipeline {
             }
         }
         stage('sonar analysis') {
+            environment {
+                SCANNER_HOME = tool 'sonar-scanner'
+            }
 
               steps {
                   withSonarQubeEnv('SONAR_CLOUD') {
-                       sh 'mvn package sonar:sonar -Dsonar.projectkey=spring786 -Dsonar.organization=spring786 -Dsonar.token=f53559ab41622c1375e45d72cdb431b6aaa9b2e3'
+                       sh '${SCANNER_HOME**}**}/bin/sonar-scanner mvn clean package sonar:sonar -Dsonar.projectkey=spring786 -Dsonar.organization=spring786 -Dsonar.token=f53559ab41622c1375e45d72cdb431b6aaa9b2e3'
                 }
             }
         }
