@@ -20,21 +20,13 @@ pipeline {
             }
         }
         stage('sonar analysis') {
-
               steps {
                   withSonarQubeEnv('SONAR_CLOUD') {
-                       sh 'mvn clean package sonar:sonar -Dsonar.projectkey=spring786 -Dsonar.organization=spring786 -Dsonar.token=f53559ab41622c1375e45d72cdb431b6aaa9b2e3'
+                       sh 'mvn clean package sonar:sonar'
+                       }
+                    }
                 }
-            }
-        }
-        stage('post build') {
-            steps {
-                archiveArtifacts artifacts: '**/target/spring-petclinic-3.1.0-SNAPSHOT.jar',
-                                 onlyIfSuccessful: true
-                junit testResults: '**/surefire-reports/TEST-*.xml'
-            }
         }
     }
-}
 
  
